@@ -1,0 +1,132 @@
+{
+  "posts": [
+    {
+      "id": "",
+      "title": "",
+      "views": ""
+    },
+    {
+      "id": "I81I82",
+      "title": "React developer ",
+      "views": "2300",
+      "isExisting": true
+    },
+    {
+      "id": "J24J09",
+      "title": "ajay",
+      "views": "200",
+      "isExisting": true
+    },
+    {
+      "id": "B3I6E4B4",
+      "title": "nikhil",
+      "views": "500",
+      "isExisting": true
+    },
+    {
+      "id": "E1F3G7",
+      "title": "akash kumar",
+      "views": "60000",
+      "isExisting": true
+    },
+    {
+      "id": "A3F2I3",
+      "title": "akash",
+      "views": "6000",
+      "isExisting": false
+    },
+    {
+      "id": "G0H9K2",
+      "title": "himanshu",
+      "views": "200",
+      "isExisting": true
+    },
+    {
+      "id": "D2H0H3",
+      "title": "vikas",
+      "views": "9000",
+      "isExisting": true
+    },
+    {
+      "id": "B3D0H4",
+      "title": "new",
+      "views": "200",
+      "isExisting": true
+    },
+    {
+      "id": "A5H0H3",
+      "title": "rishu",
+      "views": "500",
+      "isExisting": true
+    },
+    {
+      "id": "B3K8H3",
+      "title": "brijesh",
+      "views": "1234",
+      "isExisting": true
+    },
+    {
+      "id": "54H0J3",
+      "title": "karthik",
+      "views": "6000",
+      "isExisting": true
+    },
+    {
+      "id": "M5H9H3",
+      "title": "rishab",
+      "views": "900",
+      "isExisting": true
+    },
+    {
+      "id": "P28R65",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    },
+    {
+      "id": "D63Q88",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    },
+    {
+      "id": "B71X64",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    },
+    {
+      "id": "A71W65",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    },
+    {
+      "id": "U01Y93",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    },
+    {
+      "id": "N89C67",
+      "title": "",
+      "views": "",
+      "isExisting": true
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
