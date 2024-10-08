@@ -21,7 +21,7 @@ it's default open in the
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-This project also uses an error boundary for user comfort.
+#### This project also uses an error boundary for user comfort.
 
 ### `npm test`
 
