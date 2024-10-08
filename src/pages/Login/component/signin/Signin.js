@@ -12,7 +12,7 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import { toast } from "react-toastify"
 import { StyledTextFiled } from "component/StyledComponent/StyledComponent"
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import { isCancel } from "axios"
+// import { isCancel } from "axios"
 const Signin = () => {
 
     const emailValidate = useSelector((state) => { return state.LoginReducer })

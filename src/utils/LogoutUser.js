@@ -1,16 +1,16 @@
 import { Avatar, Box, Button, Dialog, DialogTitle, Grid, IconButton, Typography } from "@mui/material"
 import { onAccountDetailPage, updateType } from "pages/Login/LoginSlice"
-import { useState } from "react"
+// import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import CloseIcon from '@mui/icons-material/Close';
+// import CloseIcon from '@mui/icons-material/Close';
 import UserAvatar from "./UserAvatr";
 
 const LogoutUser = ({ avatar , setAnchorElUser}) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
 
     const orgType = localStorage.getItem('userType')
 
@@ -29,9 +29,9 @@ const LogoutUser = ({ avatar , setAnchorElUser}) => {
     }
 
     const userName = localStorage.getItem('userName');
-    const userType = localStorage.getItem('userType')
-    const userEmail = localStorage.getItem('userEmail')
-    const userId = localStorage.getItem('userId')
+    // const userType = localStorage.getItem('userType')
+    // const userEmail = localStorage.getItem('userEmail')
+    // const userId = localStorage.getItem('userId')
 
     const handelAccount = () =>{
         dispatch(onAccountDetailPage(true))

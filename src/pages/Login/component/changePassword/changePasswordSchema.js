@@ -1,4 +1,3 @@
-import { Password } from '@mui/icons-material';
 import * as Yup from 'yup';
 
 // const emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,63})$/;

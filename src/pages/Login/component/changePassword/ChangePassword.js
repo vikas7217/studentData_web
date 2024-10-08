@@ -16,6 +16,8 @@ const ChangePassword = () => {
   const [oneCapitalLatter, setOneCapitalLatter] = useState(false);
   const [specialChar, setSpecialChar] = useState(false);
   const [number, setNumber] = useState(false);
+  const [passwordLength,setPasswordLength] = useState('')
+
 
   const email = localStorage.getItem("userEmail");
 
@@ -61,7 +63,7 @@ const ChangePassword = () => {
   const validatePassword = (password) => {
     var strengthScore = 0;
 
-
+    setPasswordLength(password)
     const smallLatter = /[a-z]/.test(password);
     const capitalLatter = /[A-Z]/.test(password);
     const number = /\d/.test(password);
@@ -109,25 +111,25 @@ const ChangePassword = () => {
     }
   };
 
-  const checkValid = (password) => {
-    const smallLatter = /[a-z]/.test(password);
-    const capitalLatter = /[A-Z]/.test(password);
-    const number = /\d/.test(password);
-    const specialChar = /[A-Za-z0-9]/.test(password);
-    if (!smallLatter) {
-      setOneSmallLatter(false);
-    }
-    if (!capitalLatter) {
-      setOneCapitalLatter(false);
-    }
-    if (!number) {
-      setNumber(false);
-    }
-    if (!specialChar) {
-      setSpecialChar(false);
-    }
-    if (password.length < 8) setLength(false);
-  };
+  // const checkValid = (password) => {
+  //   const smallLatter = /[a-z]/.test(password);
+  //   const capitalLatter = /[A-Z]/.test(password);
+  //   const number = /\d/.test(password);
+  //   const specialChar = /[A-Za-z0-9]/.test(password);
+  //   if (!smallLatter) {
+  //     setOneSmallLatter(false);
+  //   }
+  //   if (!capitalLatter) {
+  //     setOneCapitalLatter(false);
+  //   }
+  //   if (!number) {
+  //     setNumber(false);
+  //   }
+  //   if (!specialChar) {
+  //     setSpecialChar(false);
+  //   }
+  //   if (password.length < 8) setLength(false);
+  // };
 
   return (
     <>
@@ -196,7 +198,8 @@ const ChangePassword = () => {
                 {formik.errors.newPassword}
               </Typography>
             )}
-            {strength.length === 0 ? (
+            {console.log('passwordLength', passwordLength.length)}
+            {passwordLength.length === 0 ? (
               ""
             ) : (
               <Typography

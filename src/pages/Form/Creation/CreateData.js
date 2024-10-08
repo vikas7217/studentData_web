@@ -1,9 +1,9 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography, useMediaQuery } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getRequest, postRequest, putRequest } from "../../../Dada/Axios";
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom"
-import { Form, useFormik } from "formik";
+import {  useFormik } from "formik";
 import CreateUserSchema from "./createUserSchema";
 import { StyledTextFiled,StyledSelectedFiled } from "component/StyledComponent/StyledComponent";
 
@@ -14,9 +14,9 @@ const CreateData = () => {
 
     // const [save, setSave] = useState({})
     const [viewMode, setViewMode] = useState('post')
-    const [isEdit, setIsEdit] =useState(false)
-    const [userId, setUserId] = useState('')
-    const isMobile = useMediaQuery('(max-width:500px)')
+    // const [isEdit, setIsEdit] =useState(false)
+    // const [userId, setUserId] = useState('')
+    // const isMobile = useMediaQuery('(max-width:500px)')
     const navigate = useNavigate()
 
     const location = useLocation()
@@ -36,7 +36,7 @@ const CreateData = () => {
     useEffect(() => {
         if (id !== '') {
             EditDataById(id)
-            setIsEdit(true)
+            // setIsEdit(true)
         }
     }, [id])
 

@@ -38,7 +38,7 @@ const UserAvatar =({name, height, width, fontSize}) => {
         if(firstLatter==='M') {
             setColor('#cccc69')
         }
-    },[])
+    },[firstLatter])
 
     return (
         <>

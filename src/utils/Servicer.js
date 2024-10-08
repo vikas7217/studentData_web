@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip } from "@mui/material"
+import { Box, IconButton, Menu, MenuItem, Tooltip } from "@mui/material"
 import LogoutUser from "./LogoutUser";
 import UserAvatar from "./UserAvatr";
 

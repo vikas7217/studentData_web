@@ -1,4 +1,4 @@
-import { Button, Grid, Typography, useForkRef } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { StyledTextFiled } from "component/StyledComponent/StyledComponent";
 import { useFormik } from "formik";
 import CreatePasswordSchema from "./CreatePasswordSchema";
@@ -17,6 +17,7 @@ const CreatePassword = () => {
   const [oneCapitalLatter, setOneCapitalLatter] = useState(false);
   const [specialChar, setSpecialChar] = useState(false);
   const [number, setNumber] = useState(false);
+  const [passwordLength,setPasswordLength] = useState(false)
 
   const getReduxForCreatePass = useSelector((state) => state.LoginReducer);
 
@@ -54,7 +55,7 @@ const CreatePassword = () => {
 
   const validatePassword = (password) => {
     var strengthScore = 0;
-
+    setPasswordLength(password)
 
     const smallLatter = /[a-z]/.test(password);
     const capitalLatter = /[A-Z]/.test(password);
@@ -136,8 +137,7 @@ const CreatePassword = () => {
                 {formik.errors.password}
               </Typography>
             )}
-
-            {strength.length === 0 ? (
+            {passwordLength === 0 ? (
               ""
             ) : (
               <Typography
