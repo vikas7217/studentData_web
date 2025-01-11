@@ -12,7 +12,6 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
                         columnHide.includes(key) ? null : (
                             <Typography key={key} sx={{ width: isMobile ? '5rem' : '10rem',textAlign:'start',margin:'0.5rem',wordBreak:'break-word' }} >
                                 {item[key]}
-                                {/* {tableData(item[key])} */}
                             </Typography>
                         )
                     ))
@@ -36,16 +35,16 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
         <>
                 <Typography variant="h5" mt={5}> Dynamic Table</Typography>
             <Grid xs={12} mt={3} mb={2} sx={{ display: 'flex', justifyContent: 'center',paddingY:'1rem' }} >
-                <Grid xs={12} component={Paper} elevation={3} sx={{ width: isMobile ? '95%' : '100%', height: '38rem' , maxHeight: '38rem', overflow: 'auto' }}>
-                   {data ?  <Table sx={{}}>
-                        <TableHead sx={{ backgroundColor: '#F7F9FF', position: 'sticky', top: 0, zIndex: 10, display: 'flex', justifyContent: 'space-between' }}>
+                <Grid xs={12} id="table_main_grid" component={Paper} elevation={3} sx={{ width: isMobile ? '95%' : '97rem', height: '38rem' , maxHeight: '38rem', overflow: 'auto' }}>
+                   {data ?  <Table sx={{}} id="table" >
+                        <TableHead id="table_head" sx={{ backgroundColor: '#F7F9FF', position: 'sticky', top: 0, zIndex: 10, display: 'flex', justifyContent: 'space-between' }}>
                             <TableRow sx={{ display: 'flex', justifyContent: 'space-between' }}>
                             {
                                 column && Object.keys(column).map((key) => (
                                     <span>
                                         { columnHide.includes(key) ? null : (
                                             <>
-                                                <TableCell key={key} sx={{ width: isMobile ? '2.5rem ' : '10rem', padding: '1rem 1.3rem',textAlign:'start' }} >
+                                                <TableCell key={key} sx={{ width: isMobile ? '2.5rem ' : '11rem', padding: '1rem',textAlign:'start' }} >
                                                     {key.charAt(0).toUpperCase() + key.slice(1)}
                                                 </TableCell>
 
@@ -65,18 +64,6 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
                       <TableBody>
                             {
                                 data && data?.map((item) => (
-
-                                    // <TableRow key={item.id}>
-                                    //    { Object.keys(item).map((key)=> (
-                                    //     columnHide.includes(key) ? null : (
-                                    //     <TableCell key={key} >
-                                    //         {/* {item[key]} */}
-                                    //         {tableData(item[key])}
-                                    //     </TableCell>
-                                    //     )
-                                    //     ))
-                                    //     }
-                                    // </TableRow>
                                     <TableRow key={item.id}>
                                         <TableCell >
                                             {tableData(item)}

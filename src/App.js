@@ -2,7 +2,7 @@ import './App.css';
 // import Featch from './pages/GetData/featch';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { router } from './pages/router';
+import { router } from './router';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // import { Typography } from '@mui/material';
 import Layout from './component/Layout';
@@ -20,10 +20,8 @@ function App() {
         path:'/',
         element: 
         <ErrorBoundary>
-
           <Layout orgType={orgType} />
         </ErrorBoundary>,
-        // errorElement:<ErrorBound Error={ Error} />,
         children:router
       }
     ]

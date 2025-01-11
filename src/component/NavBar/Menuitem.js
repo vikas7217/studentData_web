@@ -1,5 +1,3 @@
-
-// import AboutIcon from 'assets/world.svg';
 import CreateIconB from 'assets/icon-plus (1).svg';
 import CreateIconW from 'assets/icon-plusW.svg'
 import BuildingIcon from 'assets/building.svg'

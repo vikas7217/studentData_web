@@ -10,10 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store} >
-    {/* <ErrorBoundary fallback ={'error is '} error={Error}> */}
 
     <App />
-    {/* </ErrorBoundary> */}
     </Provider>
   </React.StrictMode>
 );
