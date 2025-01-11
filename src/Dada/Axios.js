@@ -67,11 +67,8 @@ export const putRequest =async(url,payload)=>{
 
 
 
-    // const baseUrl = 'http://localhost:4000'
-    // let baseUrlNest = 'http://localhost:5000' ;
     const baseUrlNest = process.env.REACT_APP_API_URL;
 
-    // const baseUrlNest = process.env.REACT_BASE_URL;
     const accessToken = localStorage.getItem("access_Token")
 
     const headers = {

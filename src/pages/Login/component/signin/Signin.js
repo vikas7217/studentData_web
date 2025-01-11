@@ -12,7 +12,8 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import { toast } from "react-toastify"
 import { StyledTextFiled } from "component/StyledComponent/StyledComponent"
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-// import { isCancel } from "axios"
+import './Singin.scss'
+
 const Signin = () => {
 
     const emailValidate = useSelector((state) => { return state.LoginReducer })
@@ -21,8 +22,6 @@ const Signin = () => {
     const dispatch = useDispatch()
 
     const [emailChange, setEmailChange] = useState(false);
-    // const [disablePass, setDisabledPass] = useState(true)
-    // const [isLoading, setIsLogin] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
 
     const navigate = useNavigate()
@@ -62,30 +61,7 @@ const Signin = () => {
         }
 
     }
-
-    // const handelAccount = async (data) => { 
-    //     setIsLogin(true);
-    //     const accessToken = data.access_token
-    //     const headers = {
-    //         Authorization: `Bearer ${accessToken}`
-    //     }
-    //     const req =await getRequest('/api/profile/user', headers);
-    //     if (req?.data?.profile?.isSuccess) {
-    //         const userData = req?.data?.profile?.userProfile;
-    //         localStorage.setItem('userType', userData.type)
-    //         localStorage.setItem('userEmail', userData.email)
-    //         localStorage.setItem('userId', userData.id)
-    //         dispatch(updateType(userData.type))
-    //         toast.success('Login Successfully')
-    //         if (userData.type) {
-    //             navigate('/home')
-    //         }
-    //         setIsLogin(false)
-    //     } else{
-    //         setIsLogin(false)
-    //     }
-
-    // }
+    
 
     const handelSaveLocal = (data) => {
         localStorage.setItem('access_Token', data?.access_token)
@@ -111,10 +87,7 @@ const Signin = () => {
 
         const data = await req.data;
         if (data?.isSuccess === true && data?.access_token) {
-            // handelAccount(data)
             handelSaveLocal(data)
-            // localStorage.setItem('access_Token', JSON.stringify(data?.access_token))
-
             setIsLogin(false)
         }
         if (data?.isSuccess === true && data?.message === "Incorrect Password") {
@@ -135,14 +108,7 @@ const Signin = () => {
     useEffect(() => {
 
     }, [])
-    // debugger
-    // const handelCreatePassword = (e) =>{
-
-    //     if(isEmailExist) { 
-    //         dispatch(createNewUserPassword(true));
-    //         dispatch(loginPage(false))
-    //     }
-    // }
+    
 
     const handelCreatePassword = (e) => {
 
@@ -154,7 +120,7 @@ const Signin = () => {
     return (
         <>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} id="login_form">
 
                 <Grid xs={12}>
                     <Grid xs={12} sx={{ display: 'flex' }}>
@@ -162,6 +128,7 @@ const Signin = () => {
 
 
                             <StyledTextFiled
+                                id="email_filed"
                                 fullWidth
                                 size="small"
                                 label='User Email'
@@ -201,7 +168,8 @@ const Signin = () => {
                     </Grid>
                     <Grid xs={12} mt={2}>
 
-                        <StyledTextFiled
+                        <StyledTextFiled 
+                            id="password_filed"
                             fullWidth
                             size="small"
                             label='Password'
@@ -243,13 +211,13 @@ const Signin = () => {
                             </Typography>
                         }
                     </Grid>
-                    <Grid sx={{display: 'flex', justifyContent: 'start'}}>
-                        { isEmailExist&&isPasswordExist&& emailChange&& <Button onClick={handelCreatePassword}><Typography type='button' sx={{fontSize: '10px',color: '#02a0fc'}}>Forgot Password</Typography></Button>}
+                    <Grid mt={1} sx={{display: 'flex', justifyContent: 'start'}}>
+                        { isEmailExist&&isPasswordExist&& emailChange&& <span onClick={handelCreatePassword} id="forget_password" className="forget_password" style={{cursor:'pointer'}} >Forgot Password</span>}
                     </Grid>
 
                     <Grid mt={2}>
                         {!isPasswordExist & isEmailExist & emailChange ? 
-                            <Button variant="outlined" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
+                            <Button id="create_password" variant="outlined" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
                             : !isLoading ? <Button variant="outlined" type="submit" disabled={!isEmailExist || formik.values.password === '' ? true : false}>
                                 Login
                             </Button> :
