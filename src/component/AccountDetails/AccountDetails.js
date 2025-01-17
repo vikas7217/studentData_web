@@ -222,7 +222,7 @@ const AccountDetails = () => {
           style={{ textAlign: "center", marginLeft: "4px", fontSize: "19px" }}
         >
           {" "}
-          >{" "}
+          {" "}
         </span>{" "}
         <Typography sx={{ fontSize: "19px", color: "rgb(101 102 104)" }}>
           {" "}

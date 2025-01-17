@@ -1,0 +1,10 @@
+.index {
+    height: 94.1vh;
+    opacity: 0.8;
+    .employeeImage {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        overflow: hidden;
+    }
+}

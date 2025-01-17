@@ -120,10 +120,10 @@ const Signin = () => {
     return (
         <>
 
-            <form onSubmit={formik.handleSubmit} id="login_form">
+            <form onSubmit={formik.handleSubmit} id="login_form" className="login_form_Page">
 
-                <Grid xs={12}>
-                    <Grid xs={12} sx={{ display: 'flex' }}>
+                <Grid xs={12} mt={5}>
+                    <Grid xs={12} mt={5} sx={{ display: 'flex' }}>
                         <Grid xs={11} sm={12} sx={{ width: '100%' }}>
 
 
@@ -154,7 +154,7 @@ const Signin = () => {
                                 Boolean(
                                     formik.touched.email && formik.touched.email
                                 ) &&
-                                <Typography sx={{ color: 'red', width: "100%", textAlign: 'start', fontSize: '12px' }} >
+                                <Typography className="error_message" >
                                     {formik.errors.email}
                                 </Typography>
                             }
@@ -166,7 +166,7 @@ const Signin = () => {
                             }
                         </Grid>
                     </Grid>
-                    <Grid xs={12} mt={2}>
+                    <Grid xs={12} mt={5}>
 
                         <StyledTextFiled 
                             id="password_filed"
@@ -206,19 +206,19 @@ const Signin = () => {
                             Boolean(
                                 formik.touched.password && formik.touched.password
                             ) &&
-                            <Typography sx={{ color: 'red', width: "100%", textAlign: 'start', fontSize: '12px' }} >
+                            <Typography className="error_message" >
                                 {formik.errors.password}
                             </Typography>
                         }
                     </Grid>
-                    <Grid mt={1} sx={{display: 'flex', justifyContent: 'start'}}>
+                    <Grid mt={4} sx={{display: 'flex', justifyContent: 'start'}}>
                         { isEmailExist&&isPasswordExist&& emailChange&& <span onClick={handelCreatePassword} id="forget_password" className="forget_password" style={{cursor:'pointer'}} >Forgot Password</span>}
                     </Grid>
 
-                    <Grid mt={2}>
+                    <Grid mt={4}>
                         {!isPasswordExist & isEmailExist & emailChange ? 
-                            <Button id="create_password" variant="outlined" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
-                            : !isLoading ? <Button variant="outlined" type="submit" disabled={!isEmailExist || formik.values.password === '' ? true : false}>
+                            <Button id="create_password" variant="contained" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
+                            : !isLoading ? <Button variant="contained" type="submit" disabled={!isEmailExist || formik.values.password === '' ? true : false}>
                                 Login
                             </Button> :
                                 <LinearProgress />}

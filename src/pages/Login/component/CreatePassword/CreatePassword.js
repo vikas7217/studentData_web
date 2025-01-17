@@ -109,7 +109,7 @@ const CreatePassword = () => {
 
   return (
     <>
-      <Grid>
+      <Grid mt={5}>
         <Grid>
           <Grid>
             <StyledTextFiled

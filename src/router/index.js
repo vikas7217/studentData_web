@@ -3,6 +3,8 @@ import React, { Suspense } from "react"
 import PrivateRoute from "security/PrivateRoute";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CompanyIndex from "pages/CompanyPortal/CompanyIndex";
+import InsertSheet from "pages/TimeSheets/InsertSheets";
 
 const Featch = React.lazy(() => import('../pages/GetData/featch'));
 const CreateData = React.lazy(() => import('../pages/Form/Creation/CreateData'));
@@ -24,7 +26,7 @@ export const router = [
     },
     
     {
-        path: '/home',
+        path: '/EmployeeData',
         element: (
             <PrivateRoute
                 adminComponent={
@@ -44,6 +46,17 @@ export const router = [
             adminComponent={
                     <SuspenseWrapper>
                         <CreateData />
+                    </SuspenseWrapper>}>
+            </PrivateRoute>
+        )
+    },
+    {
+        path: '/EmployeeTomeSheet',
+        element: (
+            <PrivateRoute
+            adminComponent={
+                    <SuspenseWrapper>
+                        <InsertSheet />
                     </SuspenseWrapper>}>
             </PrivateRoute>
         )
@@ -70,5 +83,21 @@ export const router = [
     {
         path: '/',
         element: <Navigate to="/home" replace />
-    }
+    },
+    {
+        path: '/home',
+        element: ( userType === 'user' ?
+            <PrivateRoute
+            userComponent={
+                    <SuspenseWrapper>
+                        <CompanyIndex />
+                    </SuspenseWrapper>}>
+            </PrivateRoute> :  <PrivateRoute
+            adminComponent={
+                    <SuspenseWrapper>
+                        <CompanyIndex />
+                    </SuspenseWrapper>}>
+            </PrivateRoute>
+        )
+    },
 ]
