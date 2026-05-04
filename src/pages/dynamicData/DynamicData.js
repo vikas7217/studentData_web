@@ -2,6 +2,7 @@ import { CircularProgress, Grid, IconButton, Paper, Table, TableBody, TableCell,
 import React from "react";
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import firstLatterCapital from "utils/ToUppercase";
 
 const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, handelRemove,column }) => {
     const tableData = (item) => {
@@ -17,7 +18,7 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
                     ))
                     }
                     <Typography sx={{display: 'flex' }} >
-                        <IconButton variant='contained' onClick={() => { handelEdit(item.id); }} sx={{ marginRight: '0.5rem', color: '#02A0FC' }}>
+                        <IconButton variant='contained' onClick={() => { handelEdit(item.id) }} sx={{ marginRight: '0.5rem', color: '#02A0FC' }}>
                             <EditOutlinedIcon />
                         </IconButton>
                         <IconButton variant='contained' onClick={() => handelRemove(item.id)} sx={{ color: '#752928' }} >
@@ -30,6 +31,7 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
 
 
     }
+
 
     return (
         <>
@@ -45,7 +47,7 @@ const DynamicData = ({ data, columnHide = ["isSuccess"], isMobile, handelEdit, h
                                         { columnHide.includes(key) ? null : (
                                             <>
                                                 <TableCell key={key} sx={{ width: isMobile ? '2.5rem ' : '11rem', padding: '1rem',textAlign:'start' }} >
-                                                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                                                    {firstLatterCapital(key)}
                                                 </TableCell>
 
                                             </>

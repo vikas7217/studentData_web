@@ -6,9 +6,6 @@ import {
   DialogContent,
   Grid,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
   Menu,
   MenuItem,
   Paper,
@@ -36,9 +33,9 @@ import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { getRequest } from "Dada/Axios";
-import LogoutIcon from "@mui/icons-material/Logout";
 import KeyIcon from "@mui/icons-material/Key";
 import SettingIcon from "../../assets/setting.png";
+import firstLatterCapital from "utils/ToUppercase";
 const AccountDetails = () => {
   const userType = localStorage.getItem("userType");
   const userEmail = localStorage.getItem("userEmail");
@@ -49,6 +46,7 @@ const AccountDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [accountDetails, setAccountDetails] = useState();
+  
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -64,7 +62,6 @@ const AccountDetails = () => {
       console.error("error", error);
     }
   };
-
   useEffect(() => {
     dispatch(onAccountDetailPage(true));
     getAccountDetails();
@@ -85,10 +82,6 @@ const AccountDetails = () => {
     window.location.reload();
   };
 
-  const handelLogOutPopup = () => {
-    setOpenLogoutPopup(true);
-  };
-
   const handelClosePopup = () => {
     setOpenLogoutPopup(false);
   };
@@ -102,34 +95,10 @@ const AccountDetails = () => {
     navigate("/Login");
   };
 
+const name = firstLatterCapital(userName);
+
   return (
     <>
-      {/* <Grid
-        my={2}
-        ml={5}
-        sx={{
-          display: "flex",
-          alignItems: "baseline",
-          textDecoration: "outlined",
-        }}
-      >
-        <Link
-          to="/home"
-          style={{ fontSize: "20px", color: "rgb(101 102 104)" }}
-        >
-          Home{" "}
-        </Link>{" "}
-        <span
-          style={{ textAlign: "center", marginLeft: "4px", fontSize: "19px" }}
-        >
-          {" "}
-          >{" "}
-        </span>{" "}
-        <Typography sx={{ fontSize: "19px", color: "rgb(101 102 104)" }}>
-          {" "}
-          Account Detail
-        </Typography>
-      </Grid> */}
       <Grid
         sx={{ display: "flex", justifyContent: "normal", overflow: "hidden" }}
       >
@@ -177,7 +146,7 @@ const AccountDetails = () => {
                 <TableCell>
                   <Heading
                     icon={userIcon}
-                    value={userName.charAt(0).toUpperCase() + userName.slice(1)}
+                    value={name}
                   />
                 </TableCell>
               </TableRow>
@@ -214,18 +183,18 @@ const AccountDetails = () => {
       >
         <Link
           to="/home"
-          style={{ fontSize: "20px", color: "rgb(101 102 104)" }}
+          style={{ fontSize: "19px", color: "rgb(101 102 104)",textDecoration:'none' }}
         >
-          Home{" "}
-        </Link>{" "}
+          Home
+        </Link>
         <span
           style={{ textAlign: "center", marginLeft: "4px", fontSize: "19px" }}
         >
-          {" "}
-          {" "}
-        </span>{" "}
+          {'/'}
+          
+        </span>
         <Typography sx={{ fontSize: "19px", color: "rgb(101 102 104)" }}>
-          {" "}
+          
           Account Detail
         </Typography>
       </Grid>
@@ -269,8 +238,7 @@ const AccountDetails = () => {
                     <Heading
                       icon={userIcon}
                       value={
-                        accountDetails?.userName.charAt(0).toUpperCase() +
-                        accountDetails?.userName.slice(1)
+                        firstLatterCapital(accountDetails?.userName)
                       }
                     />
                   </Grid>
@@ -284,8 +252,7 @@ const AccountDetails = () => {
                     }}
                   >
                     <Typography>
-                      {accountDetails?.roll.charAt(0).toUpperCase() +
-                        accountDetails?.roll.slice(1)}
+                      {firstLatterCapital(accountDetails?.roll)}
                     </Typography>
                   </Grid>
                 </Paper>

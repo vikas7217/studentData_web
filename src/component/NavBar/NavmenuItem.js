@@ -26,7 +26,10 @@ const navMenu = ReduceDuplicate(navItem)
 
 const isMobile = MediaQuery()
 const RollType = getRollType ?  getRollType : getRollTypeLocal;
+
     const columnHide = RollType === 'user' ? ['Create']  : []
+
+
 
 return(
     <>

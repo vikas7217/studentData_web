@@ -1,8 +1,7 @@
 import { useFormik } from "formik"
 import SignInSchema from "./LohinSchema"
 import { useEffect, useState } from "react"
-import { Button, Grid, IconButton, InputAdornment, LinearProgress, Typography } from "@mui/material"
-// import { boolean } from "yup"
+import { Button, Grid, IconButton, InputAdornment, LinearProgress, Typography,CircularProgress } from "@mui/material"
 import { getRequest, postRequest } from "Dada/Axios"
 import { useNavigate } from "react-router-dom";
 import { createNewUserPassword, loginPage, passwordExist, updateType, validateEmail } from "../../LoginSlice"
@@ -16,16 +15,16 @@ import './Singin.scss'
 
 const Signin = () => {
 
-    const emailValidate = useSelector((state) => { return state.LoginReducer })
-    const isEmailExist = emailValidate?.login?.isValidEmail;
-    const isPasswordExist = emailValidate?.isPasswordExist
     const dispatch = useDispatch()
-
     const [emailChange, setEmailChange] = useState(false);
     const [isVisible, setIsVisible] = useState(false)
-
     const navigate = useNavigate()
     const [isLoading, setIsLogin] = useState(false)
+    const [isValidating, setIsValidating] = useState(true)
+    const emailValidate = useSelector((state) => { return state.LoginReducer});
+    const isEmailExist = emailValidate?.login?.isValidEmail;
+    const isPasswordExist = emailValidate?.isPasswordExist
+    
 
     const initialValue = {
         email: '',
@@ -35,6 +34,7 @@ const Signin = () => {
 
 
     const checkIsValidate = async () => {
+        setIsValidating(false)
         const email = formik.values.email
         try {
             if (email) {
@@ -46,12 +46,14 @@ const Signin = () => {
                     dispatch(validateEmail(data.isEmailExist))
                     dispatch(passwordExist(data.isPasswordExist))
                     formik.setFieldValue('isValidEmail', data.isValidate)
+                    // setIsValidating(true)
                     setEmailChange(true)
 
                 } else {
                     dispatch(validateEmail(data.isEmailExist))
                     dispatch(passwordExist(data.isPasswordExist))
                     formik.setFieldValue('isValidEmail', data.isValidate)
+                    setIsValidating(true)
                     setEmailChange(true)
                 }
             }
@@ -60,8 +62,7 @@ const Signin = () => {
             dispatch(validateEmail(false))
         }
 
-    }
-    
+    }    
 
     const handelSaveLocal = (data) => {
         localStorage.setItem('access_Token', data?.access_token)
@@ -162,7 +163,7 @@ const Signin = () => {
                         <Grid xs={1} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: "green" }}>
 
                             {
-                                isEmailExist && emailChange ? <span style={{ marginLeft: '0.2rem' }}>  <CheckCircleOutlineOutlinedIcon /> </span> : ""
+                                isEmailExist && emailChange ? <span style={{ marginLeft: '0.2rem' }}>  <CheckCircleOutlineOutlinedIcon /> </span> : isValidating ? "": <span style={{ marginLeft: '0.2rem' }} ><CircularProgress size={30} /></span>
                             }
                         </Grid>
                     </Grid>
@@ -177,7 +178,7 @@ const Signin = () => {
                             value={formik.values.password}
                             type={isVisible ? "text" : 'password'}
                             onChange={(e) => {
-                                formik.setFieldValue('password', e.target.value)
+                                formik.setFieldValue('password',isValidating ? e.target.value :'')
                             }}
                             onBlur={(e) => {
                                 formik.handleBlur(e)

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 import UserAvatar from "./userAvatar/UserAvatr";
 import "./LogoutUser.scss";
+import firstLatterCapital from "./ToUppercase";
 
 const LogoutUser = ({ avatar, setAnchorElUser }) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const LogoutUser = ({ avatar, setAnchorElUser }) => {
   };
 
   const userName = localStorage.getItem("userName");
+  const name = firstLatterCapital(userName)
 
 
   const handelAccount = () => {
@@ -59,7 +61,7 @@ const LogoutUser = ({ avatar, setAnchorElUser }) => {
               <Box mt={1}>
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   {/* {avatar} */}
-                  {userName.charAt(0).toUpperCase() + userName.slice(1)}
+                  {name}
                 </Typography>
               </Box>
 

@@ -1,21 +1,14 @@
 import { useEffect, useState } from 'react'
 import { getRequest, putRequest } from "../../Dada/Axios"
-import { Grid, IconButton, Pagination, Typography, useMediaQuery } from '@mui/material'
+import { Grid, Pagination, useMediaQuery } from '@mui/material'
 import { toast } from 'react-toastify';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import DynamicData from '../dynamicData/DynamicData';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { onAccountDetailPage } from 'pages/Login/LoginSlice';
 
 const Featch = () => {
-    const header = [
-        'Id', 'Name', 'Views', 'Action'
-
-    ]
-
-
+    
     const navigate = useNavigate()
     const [data, setData] = useState(null)
     const [page, setPage] = useState(1)
@@ -29,10 +22,11 @@ const Featch = () => {
     const isMobile = useMediaQuery('(max-width:500px)')
     const dispatch = useDispatch()
 
+
     const getData = async () => {
         try {
 
-            const req = await getRequest(`/api/service/my`)
+            const req = await getRequest(`/api/service/my/filter`)
             if (req?.data?.isSuccess) {
                 const data = req?.data?.usersServicer;
                 const offset = data.slice(entriesFrom, entriesTo)
@@ -99,7 +93,7 @@ const Featch = () => {
 
 
     const handelRemove = async (id) => {
-      const req = await putRequest(`/api/service/${id}`);
+      const req = await putRequest(`/api/service/removeUser/${id}`);
 
       if(req.data.isSuccess){
         toast.success(req.data.message)
@@ -107,30 +101,30 @@ const Featch = () => {
       }
     }
     
-    const tableData = (item) => {
+    // const tableData = (item) => {
 
-        return (
-            <>
-                <Grid sx={{ width: '100%', }}>
+    //     return (
+    //         <>
+    //             <Grid sx={{ width: '100%', }}>
 
-                    <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', }}>
-                        <Typography sx={{ width: isMobile ? '3rem' : '3rem' }}>{item.id}</Typography>
-                        <Typography sx={{ width: isMobile ? '6rem' : '6rem' }} >{item.title}</Typography>
-                        <Typography sx={{ width: isMobile ? '3rem' : '5rem', textAlign: 'center' }}>{item.views}</Typography>
-                        <Typography sx={{ display: 'flex', justifyContent: 'start' }}>
-                            <IconButton variant='contained' onClick={() => { handelEdit(item.id); }} sx={{ marginRight: '0.5rem', color: '#02A0FC' }}>
-                                <EditOutlinedIcon />
-                            </IconButton>
-                            <IconButton variant='contained' onClick={() => handelRemove(item.id)} sx={{ color: '#752928' }} >
-                                <DeleteOutlineOutlinedIcon />
-                            </IconButton>
-                        </Typography>
-                    </div>
+    //                 <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', }}>
+    //                     <Typography sx={{ width: isMobile ? '3rem' : '3rem' }}>{item.id}</Typography>
+    //                     <Typography sx={{ width: isMobile ? '6rem' : '6rem' }} >{item.title}</Typography>
+    //                     <Typography sx={{ width: isMobile ? '3rem' : '5rem', textAlign: 'center' }}>{item.views}</Typography>
+    //                     <Typography sx={{ display: 'flex', justifyContent: 'start' }}>
+    //                         <IconButton variant='contained' onClick={() => { handelEdit(item.id); }} sx={{ marginRight: '0.5rem', color: '#02A0FC' }}>
+    //                             <EditOutlinedIcon />
+    //                         </IconButton>
+    //                         <IconButton variant='contained' onClick={() => handelRemove(item.id)} sx={{ color: '#752928' }} >
+    //                             <DeleteOutlineOutlinedIcon />
+    //                         </IconButton>
+    //                     </Typography>
+    //                 </div>
 
-                </Grid>
-            </>
-        )
-    }
+    //             </Grid>
+    //         </>
+    //     )
+    // }
 
 
     return (

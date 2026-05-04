@@ -5,11 +5,11 @@
     }
 
 .drop_file_Index {
-
+box-sizing: border-box;
 .drop-file-input {
     position: relative;
     // width: 800px;
-    height: 400px;
+    height:250px;
     border: 4px solid var(--border-color);
     border-radius: 20px;
 
@@ -45,20 +45,22 @@
 
 .drop-file-input__label img {
     width: 100px;
+    mix-blend-mode: darken;
+    opacity: 2;
 }
 
 .drop-file-preview {
     margin-top: 30px;
-    box-shadow: 0 0 0 1px #d7dbdb;
+    // box-shadow: 0 0 0 1px #d7dbdb;
+    // display: flex
+
 }
 
 .drop-file-preview p {
     font-weight: 500;
 }
 
-.drop-file-preview__title {
-    margin-bottom: 20px;
-}
+
 
 .drop-file-preview__item {
     position: relative;
@@ -67,38 +69,53 @@
     background-color: var(--input-bg);
     padding: 15px;
     border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 0 0 1px #d7dbdb;
 }
 
-.drop-file-preview__item img {
-    width: 50px;
-    margin-right: 20px;
+ .drop-file-preview__item img {
+    width: 25px;
+    height: 25px;
+
 }
 
 .drop-file-preview__item__info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 20rem;
 }
-
+.drop-file-preview__title {
+    margin-bottom: 20px;
+    width: 20px;
+    height: 13px;
+   
+}
+.drop-file-preview__item_index{
+    display: flex;
+     width: 5rem;
+     justify-content:space-between;
+     align-items: center
+}
 .drop-file-preview__item__del {
     background-color: var(--box-bg);
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 13px;
     border-radius: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 10px;
-    top: 50%;
+    // align-items: center;
+    // justify-content: center;
+    // position: absolute;
+    // right: 10px;
+    // top: 50%;
     transform: translateY(-50%);
     box-shadow: var(--box-shadow);
     cursor: pointer;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
 .drop-file-preview__item:hover .drop-file-preview__item__del {
-    opacity: 1;
+    opacity: 2;
 }
 }
