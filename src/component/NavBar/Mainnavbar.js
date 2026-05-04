@@ -47,7 +47,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
@@ -63,7 +62,6 @@ export  const MainNavbar= ()=> {
 
     const isTab = useMediaQuery('(max-width:800px)')
     const isMobile  =MediaQuery()
-    // const [openNav, setOpenNav] = React.useState(false)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const openNav = Boolean(anchorEl);
     const navItemRef = React.useRef()
@@ -108,7 +106,7 @@ export  const MainNavbar= ()=> {
             <MenuIcon />
             
           </IconButton>}
-          <Menu
+          {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={openNav} 
@@ -119,7 +117,7 @@ export  const MainNavbar= ()=> {
              sx={{height:'auto'}}
             >
               <NavMenuItem/> 
-            </Menu>
+            </Menu> */}
           <Grid   sx={{ display: isMobile ? 'none' : 'block' }} >
 
           {!getAccountData&&<NavMenuItem/>}

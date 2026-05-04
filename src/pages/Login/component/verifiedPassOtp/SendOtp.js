@@ -76,7 +76,7 @@ const handelSandOtp = async () =>{
 
     return (
         <>
-            <Grid>
+            <Grid mt={5}>
                 
                 { getRedux?.isCreateNewUserPass &&  hideVerification &&<Grid>
                     <Grid sx={{}}>

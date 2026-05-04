@@ -1,5 +1,3 @@
-
-// import AboutIcon from 'assets/world.svg';
 import CreateIconB from 'assets/icon-plus (1).svg';
 import CreateIconW from 'assets/icon-plusW.svg'
 import BuildingIcon from 'assets/building.svg'
@@ -16,11 +14,6 @@ export const MenuItem = [
         title:'Home',
         icon: <KeyboardArrowDownOutlinedIcon/>,
         subNav: [
-            {
-                title:'Users Data',
-                icon:[<img src={BuildingW} style={{height:'1rem',width:'1rem'}}  alt='icon'  />,<img src={BuildingIcon} style={{height:'1rem',width:'1rem'}}  alt='icon' />],
-                path:'/home'
-             },
              {
                 title:'Company',
                 icon:[<img src={BuildingW} style={{height:'1rem',width:'1rem'}}  alt='icon'  />,<img src={BuildingIcon} style={{height:'1rem',width:'1rem'}}  alt='icon' />],
@@ -32,15 +25,15 @@ export const MenuItem = [
         title: 'About',
         icon: <KeyboardArrowDownOutlinedIcon/>,
         subNav: [
+            {
+                title:'Employees Data',
+                icon:[<img src={BuildingW} style={{height:'1rem',width:'1rem'}}  alt='icon'  />,<img src={BuildingIcon} style={{height:'1rem',width:'1rem'}}  alt='icon' />],
+                path:'/EmployeeData'
+             },
                  {
-                    title:'Company',
-                    icon:[<img src={BuildingW} style={{height:'1rem',width:'1rem'}}  alt='icon'  />,<img src={BuildingIcon} style={{height:'1rem',width:'1rem'}}  alt='icon' />],
-                    path:''
-                 },
-                 {
-                    title:'Employee Meant',
+                    title:'Time Sheet',
                     icon:[<img src={EmployeeIconW} alt='icon' style={{height:'1.5rem',width:'1rem'}}  />,<img src={EmployeeIcon} alt='icon' style={{height:'1rem',width:'1rem'}}  />],
-                    path:''
+                    path:'/EmployeeTomeSheet'
 
                  }
                 ]

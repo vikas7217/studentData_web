@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const CreateUserSchema = Yup.object().shape({
+const UserSchema = Yup.object().shape({
     email: Yup.string()
     .email('invalid email address')
     .required('email is required'),
@@ -29,5 +29,23 @@ const CreateUserSchema = Yup.object().shape({
         return digits.length === 10; // Check if the length is exactly 10 digits
     })
     .required('Phone number is required'),
+
 })
-export default CreateUserSchema;
+
+const Address = Yup.object().shape({
+streetAddress1:Yup.string().required(),
+streetAddress2:Yup.string(),
+city:Yup.string().required(),
+state:Yup.string().required(),
+stateCode:Yup.string().required(),
+pinCode:Yup.string(),
+zipCode:Yup.string(),
+country:Yup.string().required(),
+countryCode:Yup.string().required()
+})
+
+const CreateUser = Yup.object().shape({
+    UserSchema:UserSchema,
+    Address:Address
+})
+export default CreateUser;

@@ -1,6 +1,6 @@
 
 // import { Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import { MainNavbar } from "./NavBar/Mainnavbar";
 import { Grid } from "@mui/material";
@@ -11,6 +11,7 @@ const Layout=({orgType})=>{
         const getType = useSelector((state)=>{ return state.LoginReducer.userType})
 
         const OrgType = getType ? getType : orgType; 
+
 
     return(
         <>

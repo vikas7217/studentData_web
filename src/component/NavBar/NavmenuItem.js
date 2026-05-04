@@ -26,7 +26,10 @@ const navMenu = ReduceDuplicate(navItem)
 
 const isMobile = MediaQuery()
 const RollType = getRollType ?  getRollType : getRollTypeLocal;
+
     const columnHide = RollType === 'user' ? ['Create']  : []
+
+
 
 return(
     <>
@@ -42,16 +45,7 @@ return(
             ))}
             
         </ul> 
-        // : 
-        // <ul className="nav-menuitem" style={{display:isMobile ? 'block' : 'flex'}} >
-        //     {navMenu?.map((item,key)=>(
-        //         <>
-
-        //           <NavLink key={key} item={item} /> 
-        //         </>
-        //     ))}
-            
-        // </ul>
+      
         }
        
     </Grid>

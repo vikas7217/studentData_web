@@ -44,12 +44,10 @@ navigate(links.path)
                 <li className="nav-list" ref={navItemRef}
                   onMouseEnter={()=>{
                     setActiveImg(true)
-                    // setOpenSubNav(true)
                   }}
 
                   onMouseLeave={()=>{
                     setActiveImg(false)
-                    // setOpenSubNav(false)
                   }}>
                     {
                        navItem?.subNav ? (

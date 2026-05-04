@@ -1,0 +1,20 @@
+.login_form_Page{
+  height: 100%;
+  margin-top: 50px;
+}
+.forget_password {
+  text-decoration: underline;
+  font-size: 17px;
+  // color: #02a0fc;
+}
+.forget_password:hover {
+    color: rgb(110, 102, 184);
+}
+.error_message {
+  color: red;
+  width: 100%;
+  text-align: start;
+  font-size: 12px;
+
+}
+

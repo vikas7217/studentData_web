@@ -6,9 +6,6 @@ import {
   DialogContent,
   Grid,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
   Menu,
   MenuItem,
   Paper,
@@ -27,8 +24,8 @@ import {
   updateType,
 } from "pages/Login/LoginSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import UserAvatar from "utils/UserAvatr";
+import { Link, useNavigate } from "react-router-dom";
+import UserAvatar from "utils/userAvatar/UserAvatr";
 import emailIcon from "../../assets/email-svgrepo-com.svg";
 import userIcon from "../../assets/portrait.svg";
 import Heading from "utils/Heading";
@@ -36,10 +33,9 @@ import { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { getRequest } from "Dada/Axios";
-import LogoutIcon from "@mui/icons-material/Logout";
 import KeyIcon from "@mui/icons-material/Key";
-// import SettingIcon from '../../assets/people_team_business_system_resource_human_management_icon_259243.svg';
 import SettingIcon from "../../assets/setting.png";
+import firstLatterCapital from "utils/ToUppercase";
 const AccountDetails = () => {
   const userType = localStorage.getItem("userType");
   const userEmail = localStorage.getItem("userEmail");
@@ -50,6 +46,7 @@ const AccountDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [accountDetails, setAccountDetails] = useState();
+  
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -59,14 +56,12 @@ const AccountDetails = () => {
     try {
       const req = await getRequest(`/api/service/useraccount/${userId}`);
       if (req?.data?.isSuccess) {
-        console.log(req?.data?.userById);
         setAccountDetails(req?.data?.userById);
       }
     } catch (error) {
       console.error("error", error);
     }
   };
-
   useEffect(() => {
     dispatch(onAccountDetailPage(true));
     getAccountDetails();
@@ -87,10 +82,6 @@ const AccountDetails = () => {
     window.location.reload();
   };
 
-  const handelLogOutPopup = () => {
-    setOpenLogoutPopup(true);
-  };
-
   const handelClosePopup = () => {
     setOpenLogoutPopup(false);
   };
@@ -103,6 +94,8 @@ const AccountDetails = () => {
 
     navigate("/Login");
   };
+
+const name = firstLatterCapital(userName);
 
   return (
     <>
@@ -153,7 +146,7 @@ const AccountDetails = () => {
                 <TableCell>
                   <Heading
                     icon={userIcon}
-                    value={userName.charAt(0).toUpperCase() + userName.slice(1)}
+                    value={name}
                   />
                 </TableCell>
               </TableRow>
@@ -178,136 +171,155 @@ const AccountDetails = () => {
             </TableBody>
           </Table>
         </Grid>
+        <Grid>
         <Grid
-          xs={10}
-          sx={{
-            height: "90vh",
-            minWidth: "85vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        my={2}
+        ml={5}
+        sx={{
+          display: "flex",
+          alignItems: "baseline",
+          textDecoration: "outlined",
+        }}
+      >
+        <Link
+          to="/home"
+          style={{ fontSize: "19px", color: "rgb(101 102 104)",textDecoration:'none' }}
         >
-          <Grid sx={{ display: "flex", justifyContent: "center" }} mt={5}>
-            <Grid mr={4}>
-              <Paper sx={{ height: "25rem", width: "15rem" }}>
-                <Grid
-                  sx={{
-                    position: "relative",
-                    zIndex: 100,
-                    bottom: "40px",
-                    left: "58px",
-                  }}
-                >
-                  <UserAvatar
-                    name={userName}
-                    height={"7rem"}
-                    width={"7rem"}
-                    fontSize={"60px"}
-                  />
-                </Grid>
-                <Grid  sx={{display:'flex',justifyContent:'flex-start',padding:'1px 15px'}} >
-                  <Heading
-                    icon={userIcon}
-                    value={
-                      accountDetails.userName.charAt(0).toUpperCase() +
-                      accountDetails.userName.slice(1)
-                    }
-                  />
-                </Grid>
+          Home
+        </Link>
+        <span
+          style={{ textAlign: "center", marginLeft: "4px", fontSize: "19px" }}
+        >
+          {'/'}
+          
+        </span>
+        <Typography sx={{ fontSize: "19px", color: "rgb(101 102 104)" }}>
+          
+          Account Detail
+        </Typography>
+      </Grid>
+          <Grid
+            xs={10}
+            sx={{
+              height: "90vh",
+              minWidth: "85vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Grid sx={{ display: "flex", justifyContent: "center" }} mt={5}>
+              <Grid mr={4}>
+                <Paper sx={{ height: "25rem", width: "15rem" }}>
+                  <Grid
+                    id="user_avatar"
+                    sx={{
+                      position: "relative",
+                      zIndex: 100,
+                      bottom: "40px",
+                      left: "58px",
+                      border: "",
+                    }}
+                  >
+                    <UserAvatar
+                      name={userName}
+                      height={"7rem"}
+                      width={"7rem"}
+                      fontSize={"60px"}
+                    />
+                  </Grid>
+                  <Grid
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      padding: "1px 15px",
+                    }}
+                  >
+                    <Heading
+                      icon={userIcon}
+                      value={
+                        firstLatterCapital(accountDetails?.userName)
+                      }
+                    />
+                  </Grid>
 
-                <Grid mt={2} sx={{display:'flex',justifyContent:'flex-start',padding:'1px 20px'}}>
-                  <Typography>
-                    {accountDetails.roll.charAt(0).toUpperCase() +
-                      accountDetails.roll.slice(1)}
-                  </Typography>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "70rem",
-                flexWrap: "wrap",
-                height: "30rem",
-              }}
-            >
-              <Grid>
-                <Paper
-                  sx={{
-                    height: "10rem",
-                    width: "20rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography variant="h5" mr={1}>
-                    Settings
-                  </Typography>
-                  <img
-                    alt="setting"
-                    src={SettingIcon}
-                    style={{ height: "2rem", width: "2rem" }}
-                  />
-                </Paper>
-              </Grid>
-              <Grid>
-                <Paper
-                  sx={{
-                    height: "10rem",
-                    width: "20rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Grid>
-                    <Typography variant="h5">Password</Typography>
-                    <KeyIcon />
-                    <Typography sx={{ fontSize: "12px" }}>
-                      Keeps your Password secure and make it strong
+                  <Grid
+                    mt={2}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      padding: "1px 20px",
+                    }}
+                  >
+                    <Typography>
+                      {firstLatterCapital(accountDetails?.roll)}
                     </Typography>
-                    <Button onClick={handelChangePassword}>
-                      Change Your Password
-                    </Button>
                   </Grid>
                 </Paper>
               </Grid>
-              <Grid>
-                <Paper sx={{ height: "10rem", width: "20rem" }}>
-                  <Typography>Settings</Typography>
-                </Paper>
+              <Grid
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "70rem",
+                  flexWrap: "wrap",
+                  height: "30rem",
+                }}
+              >
+                <Grid>
+                  <Paper
+                    sx={{
+                      height: "10rem",
+                      width: "20rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography variant="h5" mr={1}>
+                      Settings
+                    </Typography>
+                    <img
+                      alt="setting"
+                      src={SettingIcon}
+                      style={{ height: "2rem", width: "2rem" }}
+                    />
+                  </Paper>
+                </Grid>
+                <Grid>
+                  <Paper
+                    sx={{
+                      height: "10rem",
+                      width: "20rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Grid>
+                      <Typography variant="h5">Password</Typography>
+                      <KeyIcon />
+                      <Typography sx={{ fontSize: "12px" }}>
+                        Keeps your Password secure and make it strong
+                      </Typography>
+                      <Button onClick={handelChangePassword}>
+                        Change Your Password
+                      </Button>
+                    </Grid>
+                  </Paper>
+                </Grid>
+                <Grid>
+                  <Paper sx={{ height: "10rem", width: "20rem" }}>
+                    <Typography>Settings</Typography>
+                  </Paper>
+                </Grid>
+              
               </Grid>
-              <Grid>
-                <Paper
-                  sx={{
-                    height: "10rem",
-                    width: "20rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Grid>
-                    <Typography variant="h5">Log out </Typography>
-                    <LogoutIcon />
-                    <Typography>You can exit if you want's </Typography>
-                    <Button onClick={handelLogOutPopup}>LogOut</Button>
-                  </Grid>
-                </Paper>
-              </Grid>
+              <Grid></Grid>
             </Grid>
-            <Grid></Grid>
-          </Grid>
 
-          {/* <Grid>
-            <Button onClick={handelChangePassword}>Change Your Password</Button>
+           
           </Grid>
-          <Grid>
-            <Button onClick={handelLogOutPopup}>LogOut</Button>
-          </Grid> */}
         </Grid>
       </Grid>
 

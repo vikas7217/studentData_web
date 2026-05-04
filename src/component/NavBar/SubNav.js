@@ -1,5 +1,4 @@
 import { Button, Grid } from "@mui/material"
-// import NavLink from "./NavItem"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
@@ -28,11 +27,9 @@ return(
                             }}
                             onMouseLeave={()=>{
                                 setSubImgActive(false)
-                                // setOpenSubNav(false)
                               }}
                               onClick={(e)=>{handelNavigateNav(item)}}
-                            // className={activeImg ? "nav-list-title-hover" : "nav-list-title"} 
-                            // key={key}
+                           
                             >
                                 {Array.isArray(subItem.icon)===true ? (subImgActive ? subItem.icon[1] : subItem.icon[0] ) : (subItem.icon[1])}
                                

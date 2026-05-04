@@ -1,8 +1,7 @@
 import { useFormik } from "formik"
 import SignInSchema from "./LohinSchema"
 import { useEffect, useState } from "react"
-import { Button, Grid, IconButton, InputAdornment, LinearProgress, Typography } from "@mui/material"
-// import { boolean } from "yup"
+import { Button, Grid, IconButton, InputAdornment, LinearProgress, Typography,CircularProgress } from "@mui/material"
 import { getRequest, postRequest } from "Dada/Axios"
 import { useNavigate } from "react-router-dom";
 import { createNewUserPassword, loginPage, passwordExist, updateType, validateEmail } from "../../LoginSlice"
@@ -12,21 +11,20 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import { toast } from "react-toastify"
 import { StyledTextFiled } from "component/StyledComponent/StyledComponent"
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-// import { isCancel } from "axios"
+import './Singin.scss'
+
 const Signin = () => {
 
-    const emailValidate = useSelector((state) => { return state.LoginReducer })
-    const isEmailExist = emailValidate?.login?.isValidEmail;
-    const isPasswordExist = emailValidate?.isPasswordExist
     const dispatch = useDispatch()
-
     const [emailChange, setEmailChange] = useState(false);
-    // const [disablePass, setDisabledPass] = useState(true)
-    // const [isLoading, setIsLogin] = useState(false)
     const [isVisible, setIsVisible] = useState(false)
-
     const navigate = useNavigate()
     const [isLoading, setIsLogin] = useState(false)
+    const [isValidating, setIsValidating] = useState(true)
+    const emailValidate = useSelector((state) => { return state.LoginReducer});
+    const isEmailExist = emailValidate?.login?.isValidEmail;
+    const isPasswordExist = emailValidate?.isPasswordExist
+    
 
     const initialValue = {
         email: '',
@@ -36,6 +34,7 @@ const Signin = () => {
 
 
     const checkIsValidate = async () => {
+        setIsValidating(false)
         const email = formik.values.email
         try {
             if (email) {
@@ -47,12 +46,14 @@ const Signin = () => {
                     dispatch(validateEmail(data.isEmailExist))
                     dispatch(passwordExist(data.isPasswordExist))
                     formik.setFieldValue('isValidEmail', data.isValidate)
+                    // setIsValidating(true)
                     setEmailChange(true)
 
                 } else {
                     dispatch(validateEmail(data.isEmailExist))
                     dispatch(passwordExist(data.isPasswordExist))
                     formik.setFieldValue('isValidEmail', data.isValidate)
+                    setIsValidating(true)
                     setEmailChange(true)
                 }
             }
@@ -61,31 +62,7 @@ const Signin = () => {
             dispatch(validateEmail(false))
         }
 
-    }
-
-    // const handelAccount = async (data) => { 
-    //     setIsLogin(true);
-    //     const accessToken = data.access_token
-    //     const headers = {
-    //         Authorization: `Bearer ${accessToken}`
-    //     }
-    //     const req =await getRequest('/api/profile/user', headers);
-    //     if (req?.data?.profile?.isSuccess) {
-    //         const userData = req?.data?.profile?.userProfile;
-    //         localStorage.setItem('userType', userData.type)
-    //         localStorage.setItem('userEmail', userData.email)
-    //         localStorage.setItem('userId', userData.id)
-    //         dispatch(updateType(userData.type))
-    //         toast.success('Login Successfully')
-    //         if (userData.type) {
-    //             navigate('/home')
-    //         }
-    //         setIsLogin(false)
-    //     } else{
-    //         setIsLogin(false)
-    //     }
-
-    // }
+    }    
 
     const handelSaveLocal = (data) => {
         localStorage.setItem('access_Token', data?.access_token)
@@ -111,10 +88,7 @@ const Signin = () => {
 
         const data = await req.data;
         if (data?.isSuccess === true && data?.access_token) {
-            // handelAccount(data)
             handelSaveLocal(data)
-            // localStorage.setItem('access_Token', JSON.stringify(data?.access_token))
-
             setIsLogin(false)
         }
         if (data?.isSuccess === true && data?.message === "Incorrect Password") {
@@ -135,14 +109,7 @@ const Signin = () => {
     useEffect(() => {
 
     }, [])
-    // debugger
-    // const handelCreatePassword = (e) =>{
-
-    //     if(isEmailExist) { 
-    //         dispatch(createNewUserPassword(true));
-    //         dispatch(loginPage(false))
-    //     }
-    // }
+    
 
     const handelCreatePassword = (e) => {
 
@@ -154,14 +121,15 @@ const Signin = () => {
     return (
         <>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} id="login_form" className="login_form_Page">
 
-                <Grid xs={12}>
-                    <Grid xs={12} sx={{ display: 'flex' }}>
+                <Grid xs={12} mt={5}>
+                    <Grid xs={12} mt={5} sx={{ display: 'flex' }}>
                         <Grid xs={11} sm={12} sx={{ width: '100%' }}>
 
 
                             <StyledTextFiled
+                                id="email_filed"
                                 fullWidth
                                 size="small"
                                 label='User Email'
@@ -187,7 +155,7 @@ const Signin = () => {
                                 Boolean(
                                     formik.touched.email && formik.touched.email
                                 ) &&
-                                <Typography sx={{ color: 'red', width: "100%", textAlign: 'start', fontSize: '12px' }} >
+                                <Typography className="error_message" >
                                     {formik.errors.email}
                                 </Typography>
                             }
@@ -195,13 +163,14 @@ const Signin = () => {
                         <Grid xs={1} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', color: "green" }}>
 
                             {
-                                isEmailExist && emailChange ? <span style={{ marginLeft: '0.2rem' }}>  <CheckCircleOutlineOutlinedIcon /> </span> : ""
+                                isEmailExist && emailChange ? <span style={{ marginLeft: '0.2rem' }}>  <CheckCircleOutlineOutlinedIcon /> </span> : isValidating ? "": <span style={{ marginLeft: '0.2rem' }} ><CircularProgress size={30} /></span>
                             }
                         </Grid>
                     </Grid>
-                    <Grid xs={12} mt={2}>
+                    <Grid xs={12} mt={5}>
 
-                        <StyledTextFiled
+                        <StyledTextFiled 
+                            id="password_filed"
                             fullWidth
                             size="small"
                             label='Password'
@@ -209,7 +178,7 @@ const Signin = () => {
                             value={formik.values.password}
                             type={isVisible ? "text" : 'password'}
                             onChange={(e) => {
-                                formik.setFieldValue('password', e.target.value)
+                                formik.setFieldValue('password',isValidating ? e.target.value :'')
                             }}
                             onBlur={(e) => {
                                 formik.handleBlur(e)
@@ -238,19 +207,19 @@ const Signin = () => {
                             Boolean(
                                 formik.touched.password && formik.touched.password
                             ) &&
-                            <Typography sx={{ color: 'red', width: "100%", textAlign: 'start', fontSize: '12px' }} >
+                            <Typography className="error_message" >
                                 {formik.errors.password}
                             </Typography>
                         }
                     </Grid>
-                    <Grid sx={{display: 'flex', justifyContent: 'start'}}>
-                        { isEmailExist&&isPasswordExist&& emailChange&& <Button onClick={handelCreatePassword}><Typography type='button' sx={{fontSize: '10px',color: '#02a0fc'}}>Forgot Password</Typography></Button>}
+                    <Grid mt={4} sx={{display: 'flex', justifyContent: 'start'}}>
+                        { isEmailExist&&isPasswordExist&& emailChange&& <span onClick={handelCreatePassword} id="forget_password" className="forget_password" style={{cursor:'pointer'}} >Forgot Password</span>}
                     </Grid>
 
-                    <Grid mt={2}>
+                    <Grid mt={4}>
                         {!isPasswordExist & isEmailExist & emailChange ? 
-                            <Button variant="outlined" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
-                            : !isLoading ? <Button variant="outlined" type="submit" disabled={!isEmailExist || formik.values.password === '' ? true : false}>
+                            <Button id="create_password" variant="contained" disabled={!emailValidate} onClick={() => handelCreatePassword()} > Create Password </Button>
+                            : !isLoading ? <Button variant="contained" type="submit" disabled={!isEmailExist || formik.values.password === '' ? true : false}>
                                 Login
                             </Button> :
                                 <LinearProgress />}

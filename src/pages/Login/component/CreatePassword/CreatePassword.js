@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { createNewUserPassword, loginPage } from "pages/Login/LoginSlice";
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import PasswordStrength from "utils/PasswordStrength";
 
 const CreatePassword = () => {
   const dispatch = useDispatch();
@@ -108,7 +109,7 @@ const CreatePassword = () => {
 
   return (
     <>
-      <Grid>
+      <Grid mt={5}>
         <Grid>
           <Grid>
             <StyledTextFiled
@@ -188,11 +189,7 @@ const CreatePassword = () => {
           </Grid>
         </Grid>
         <Grid>
-            <Typography sx={{fontSize:'12px',display: 'flex',textAlign: 'center' }} >{length ? <Grid sx={{fontSize:'7px',color:'green'}}><CheckCircleOutlineOutlinedIcon /></Grid> :  <CheckCircleOutlineOutlinedIcon />} Minimum length of password is 8 character</Typography>
-            <Typography sx={{fontSize:'12px',display: 'flex',textAlign: 'center' }} >{oneCapitalLatter ? <Grid sx={{fontSize:'7px',color:'green'}}><CheckCircleOutlineOutlinedIcon /></Grid> : <CheckCircleOutlineOutlinedIcon />}Password must be contain at least one Capital latter</Typography>
-            <Typography sx={{fontSize:'12px',display: 'flex',textAlign: 'center' }} >{oneSmallLatter ? <Grid sx={{fontSize:'7px',color:'green'}}><CheckCircleOutlineOutlinedIcon /></Grid> : <CheckCircleOutlineOutlinedIcon />}Password must be contain at least one small latter </Typography>
-            <Typography sx={{fontSize:'12px',display: 'flex',textAlign: 'center' }} >{specialChar ? <Grid sx={{fontSize:'7px',color:'green'}}><CheckCircleOutlineOutlinedIcon /></Grid> : <CheckCircleOutlineOutlinedIcon />}Password must be contain at least one special character</Typography>
-            <Typography sx={{fontSize:'12px',display: 'flex',textAlign: 'center' }} >{ number ? <Grid sx={{fontSize:'7px',color:'green'}}><CheckCircleOutlineOutlinedIcon /></Grid> : <CheckCircleOutlineOutlinedIcon />}Password must be contain at least one number</Typography>
+            <PasswordStrength    length = {length} oneCapitalLatter = {oneCapitalLatter} oneSmallLatter ={oneSmallLatter} specialChar = {specialChar} number ={number} />
 
 
           </Grid>

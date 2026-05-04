@@ -1,0 +1,31 @@
+.index {
+    height: 93vh;
+    opacity: 0.8;
+  
+    .image-container {
+      position: relative;
+      height: 100%;
+      width: 100%;
+    }
+  
+    .employeeImage {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      overflow: hidden;
+      display: block;
+    }
+  
+    .employee-name {
+      position: absolute;
+      top: 50px;
+      left: 8px;
+      // background-color: rgba(0, 0, 0, 0.6);
+      color: black;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 20px;
+      z-index: 1;
+    }
+  }
+  
