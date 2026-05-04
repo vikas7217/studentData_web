@@ -16,7 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(onAccountDetailPage(true));
+    // dispatch(onAccountDetailPage(true));
   }, []);
 
   return (

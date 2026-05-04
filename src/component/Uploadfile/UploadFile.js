@@ -1,25 +1,4 @@
-// import { Grid } from "@mui/material"
-// import { useState } from "react"
-
-// const UploadFile = () =>{
-
-//     const [file,setFile] = useState()
-
-//     console.log(file)
-
-// return (
-//     <>
-//     <Grid className="file_upload">
-
-//      <input id="upload_file" type="file" onChange={(e) => setFile(e.target.value)} />
-//     </Grid>
-//     </>
-// )
-// }
-// export default UploadFile
-
 import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
 import "./UploadFile.scss";
 import {
   Button,
@@ -29,9 +8,12 @@ import {
   Grid,
   IconButton,
 } from "@mui/material";
-// import { ImageConfig } from '../../config/ImageConfig.js';
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import CloseIcon from "@mui/icons-material/Close";
+import upload_file from "../../assets/coworkers-office-working-together.jpg";
+import upload_cloud from "../../assets/upload-cloud-svgrepo-com.svg";
+import trash_icon from "../../assets/trash.svg";
+import { postFileUploadRequest } from "Dada/Axios";
+import { toast } from "react-toastify";
 
 const UploadFile = (props) => {
   const wrapperRef = useRef(null);
@@ -50,7 +32,6 @@ const UploadFile = (props) => {
     if (newFile) {
       const updatedList = [...fileList, newFile];
       setFileList(updatedList);
-      // props.onFileChange(updatedList);
     }
   };
 
@@ -58,73 +39,102 @@ const UploadFile = (props) => {
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
-    // props.onFileChange(updatedList);
   };
-  console.log(fileList);
+
+  const saveFile = async (file) => {
+    const formData = new FormData();
+    formData.append("files", file);
+    try {
+      const response = await postFileUploadRequest(
+        "/api/upload-file/upload",
+        formData
+      );
+      if (response.data.isSuccess) {
+        toast.success(response?.data?.message);
+        setOpen(false);
+        setFileList([])
+      } else {
+        toast.error(response?.data?.error);
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <>
       <Grid>
         <Button onClick={() => setOpen(true)}>Upload</Button>
       </Grid>
-      <Dialog id="Dialog_id" open={open} sx={{height: '50rem','&.MuiPaper-root-MuiDialog-paper':{
-            border:'1px solid red'
-          }}}>
-        <DialogContent id="Dialog_contain_id" sx={{"&.MuiPaper-root-MuiDialog-paper":{
-            border:'1px solid red'
-          }}}>
+      <Dialog
+        id="Dialog_id"
+        open={open}
+        sx={{
+          height: "50rem",
+          "&.MuiPaper-root-MuiDialog-paper": {
+            border: "1px solid red",
+          },
+        }}
+      >
         <Grid className="Dialog_file">
-          <DialogTitle sx={{width:'30rem'}}>Upload File</DialogTitle>
+          <DialogTitle sx={{ width: "30rem" }}>Upload File</DialogTitle>
           <IconButton onClick={() => setOpen(false)}>
             <CloseIcon />
           </IconButton>
         </Grid>
-        <Grid className="drop_file_Index">
-          <div
-            ref={wrapperRef}
-            className="drop-file-input"
-            onDragEnter={onDragEnter}
-            onDragLeave={onDragLeave}
-            onDrop={onDrop}
-          >
-            <div className="drop-file-input__label">
-              <img
-                src={
-                  "https://media.geeksforgeeks.org/wp-content/uploads/20240308113922/Drag-.png"
-                }
-                alt=""
-              />
-              <p>Drag & Drop your files here</p>
+        <DialogContent id="Dialog_contain_id">
+          <Grid className="drop_file_Index">
+            <div
+              ref={wrapperRef}
+              className="drop-file-input"
+              onDragEnter={onDragEnter}
+              onDragLeave={onDragLeave}
+              onDrop={onDrop}
+            >
+              <div className="drop-file-input__label">
+                <img src={upload_file} alt="" />
+                <p>Drag & Drop your files here</p>
+              </div>
+              <input type="file" value="" onChange={onFileDrop} />
             </div>
-            <input type="file" value="" onChange={onFileDrop} />
-          </div>
-          {fileList.length > 0 ? (
-            <div className="drop-file-preview">
-              {fileList.map((item, index) => (
-                <div key={index} className="drop-file-preview__item">
-                  <div className="drop-file-preview__item__info">
-                    <p>{item.name}</p>
-                  </div>
-                  <span
-                    className="drop-file-preview__item__del"
-                    onClick={() => fileRemove(item)}
-                  ></span>
-                </div>
-              ))}
-              <Grid sx={{ alignContent: "center" }}>
-                <p className="drop-file-preview__title">Ready to upload</p>
+            {fileList.length > 0 ? (
+              <Grid className="drop-file-preview">
+                {fileList.map((item, index) => (
+                  <Grid
+                    xs={12}
+                    key={index}
+                    className="drop-file-preview__item"
+                    sx={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <Grid xs={9} className="drop-file-preview__item__info">
+                      <p>{item.name}</p>
+                    </Grid>
+
+                    <Grid className="drop-file-preview__item_index">
+                      <Grid
+                        className="drop-file-preview__item__del"
+                        onClick={() => fileRemove(item)}
+                      >
+                        {" "}
+                        <img src={trash_icon} alt="icon" />
+                      </Grid>
+
+                      <Grid
+                        className="drop-file-preview__title"
+                        onClick={() => saveFile(item)}
+                      >
+                        <img src={upload_cloud} alt="icon" />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                ))}
               </Grid>
-            </div>
-          ) : null}
-        </Grid>
+            ) : null}
+          </Grid>
         </DialogContent>
       </Dialog>
     </>
   );
-};
-
-UploadFile.propTypes = {
-  onFileChange: PropTypes.func,
 };
 
 export default UploadFile;

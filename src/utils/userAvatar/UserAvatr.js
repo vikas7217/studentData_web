@@ -4,7 +4,9 @@ import userJson from './user.json'
 const UserAvatar =({name, height, width, fontSize}) => {
 
     const [color,setColor]= useState('#aed7eb')
-    const firstLatter = name?.charAt(0).toUpperCase()+name?.charAt(1)
+  
+    const firstLatter = name?.split(' ')?.map((m)=> {return m[0].toUpperCase()})?.join('')?.slice(0,2)
+
     useEffect(()=>{
         for( const user of userJson.data) {
             if(user.userName === firstLatter) {
@@ -12,8 +14,7 @@ const UserAvatar =({name, height, width, fontSize}) => {
 
             }
         }
-    },[])
-    console.log('ssss',color)
+    },[firstLatter])
     return (
         <>
         <Avatar sx={{backgroundColor:color, height, width, fontSize}} >{firstLatter}</Avatar>

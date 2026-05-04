@@ -10,7 +10,6 @@ const PrivateRoute =({adminComponent, userComponent})=>{
     const token = localStorage.getItem('access_Token') 
 
     const userType = userTypeLoginRedux ? userTypeLoginRedux : userTypeLocal;
-console.log(userComponent)
     if(!token){
         navigate('/Login')
         return <Login />

@@ -106,7 +106,7 @@ export  const MainNavbar= ()=> {
             <MenuIcon />
             
           </IconButton>}
-          <Menu
+          {/* <Menu
             id="basic-menu"
             anchorEl={anchorEl}
             open={openNav} 
@@ -117,7 +117,7 @@ export  const MainNavbar= ()=> {
              sx={{height:'auto'}}
             >
               <NavMenuItem/> 
-            </Menu>
+            </Menu> */}
           <Grid   sx={{ display: isMobile ? 'none' : 'block' }} >
 
           {!getAccountData&&<NavMenuItem/>}
